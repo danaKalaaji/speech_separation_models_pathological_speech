@@ -12,7 +12,7 @@ import joblib
 ''' Generates x different random numbers between 0 and max'''
 
 def generate_x_random_numbers(x, max):
-    numbers = []
+    numbers = [] 
     while len(numbers) < x:
         number = np.random.randint(0, max)
         if number not in numbers:
@@ -148,7 +148,7 @@ def process_x_audio_pair(base_dir, text_file_dir, processed_audio_dir, lines_pro
                         audio1_path_windows = audio1_path
                         audio2_path_windows = audio2_path
                         audio1_path = audio1_path.replace('\\', '/')
-                        audio2_path = audio1_path.replace('\\', '/')
+                        audio2_path = audio2_path.replace('\\', '/')
                         audio1_path = os.path.join(base_dir, audio1_path)
                         audio2_path = os.path.join(base_dir, audio2_path)
 

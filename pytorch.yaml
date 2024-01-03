@@ -1,0 +1,6 @@
+name: pytorch
+dependencies:
+  - python=3.11
+  - pytorch::pytorch=2.1
+  - pytorch::torchvision
+  - pytorch::torchaudio
