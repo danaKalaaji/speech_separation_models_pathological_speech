@@ -1,4 +1,4 @@
-# Pathological speech detection
+# Evaluating Performance of Pathological Speech Detection 
 
 Relevant folders:
 - PC-GITA_per_task_16000Hz: folder containing
