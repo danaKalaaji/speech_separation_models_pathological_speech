@@ -20,15 +20,16 @@ def generate_x_random_numbers(x, max):
     return numbers
 
 # %%
-''' Runs the SepFormer algorithm on the signal located at y_path'''
+''' Runs the SepFormer algorithm on the signal y'''
 
-def audio_through_Sepformer(y_path):
+def audio_through_Sepformer(y):
     sepformer = separator.from_hparams(source="speechbrain/sepformer-wsj02mix")
     print("Separating the audio with Sepformer...")
 
-    y, sr = torchaudio.load(y_path)
-    if sr != 8000:
-        raise ValueError("Sampling rate must be 8000 Hz")
+    # if parameter y is a path to the audio file
+    #y, sr = torchaudio.load(y_path)
+    #if sr != 8000:
+    #    raise ValueError("Sampling rate must be 8000 Hz")
     
     y_hat = sepformer.separate_batch(y)
     x1_s = y_hat[:, :, 0].detach().cpu()
@@ -38,15 +39,16 @@ def audio_through_Sepformer(y_path):
     return x1_s, x2_s
 
 # %%
-''' Runs the RE-SepFormer algorithm on the signal located at y_path'''
+''' Runs the RE-SepFormer algorithm on the signal y'''
 
-def audio_through_Resepformer(y_path):
+def audio_through_Resepformer(y):
     resepformer = separator.from_hparams(source="speechbrain/resepformer-wsj02mix")
     print("Separating the audio with ReSepformer...")
 
-    y, sr = torchaudio.load(y_path)
-    if sr != 8000:
-        raise ValueError("Sampling rate sr must be 8000 Hz")
+    # if parameter y is a path to the audio file
+    #y, sr = torchaudio.load(y_path)
+    #if sr != 8000:
+    #    raise ValueError("Sampling rate sr must be 8000 Hz")
 
     y_hat = resepformer.separate_batch(y)
     x1_r = y_hat[:, :, 0].detach().cpu()
@@ -112,11 +114,11 @@ def process_x_audio_pair(base_dir, text_file_dir, processed_audio_dir, lines_pro
                 # If lines_processed_per_file = 0, process all the lines in the text files
                     if lines_processed_per_file == 0:
                         processed_lines_index = [i for i in range(len(lines))]
-                        print(f"-Number of processed lines in {filename} : {len(processed_lines_index)} ")
+                        #print(f"-Number of processed lines in {filename} : {len(processed_lines_index)} ")
                         processed_file.write(f"{len(processed_lines_index)} \n")
                     else:
                         processed_lines_index = generate_x_random_numbers(lines_processed_per_file, len(lines))
-                        print(f"-Processed lines in {filename} : {processed_lines_index} ")
+                        #print(f"-Processed lines in {filename} : {processed_lines_index} ")
                         processed_file.write(f"{processed_lines_index} \n")
   
                 # Process the audios of each line chosen at random
@@ -166,22 +168,22 @@ def process_x_audio_pair(base_dir, text_file_dir, processed_audio_dir, lines_pro
                         x2 = beta * audio2[:, :duration]
                         y = x1 + x2
                         
-                        #torchaudio.save(x1_path, x1, 8000, format='wav')
-                        #torchaudio.save(x2_path, x2, 8000, format='wav')
+                        torchaudio.save(x1_path, x1, 8000, format='wav')
+                        torchaudio.save(x2_path, x2, 8000, format='wav')
                         torchaudio.save(y_path, y, 8000, format='wav')
 
                         # Calculate and save the separated audios obtained after Sepformer
-                        x1_s, x2_s = audio_through_Sepformer(y_path)
-                        #torchaudio.save(x1_s_path, x1_s, 8000, format='wav') 
-                        #torchaudio.save(x2_s_path, x2_s, 8000, format='wav')
+                        x1_s, x2_s = audio_through_Sepformer(y)
+                        torchaudio.save(x1_s_path, x1_s, 8000, format='wav') 
+                        torchaudio.save(x2_s_path, x2_s, 8000, format='wav')
                     
                         # Calculate and save the the separated audios obtained after Resepformer
-                        x1_r, x2_r = audio_through_Resepformer(y_path)
-                        #torchaudio.save(x1_r_path, x1_r, 8000, format='wav')
-                        #torchaudio.save(x2_r_path, x2_r, 8000, format='wav')
+                        x1_r, x2_r = audio_through_Resepformer(y)
+                        torchaudio.save(x1_r_path, x1_r, 8000, format='wav')
+                        torchaudio.save(x2_r_path, x2_r, 8000, format='wav')
                         
                         # Calculate the SI_SDR of the audio through Sepformer and Resepformer
-                        print("Calculating the SI_SDR...")
+                        #print("Calculating the SI_SDR...")
                         si_sdr = ScaleInvariantSignalDistortionRatio()
 
                         # SISDR for audio without separation
@@ -214,118 +216,11 @@ def process_x_audio_pair(base_dir, text_file_dir, processed_audio_dir, lines_pro
 
 
 # %%
-                        
-''' Update the processed text files in processed_audio_dir, assumes that all directories and files already exists'''
-def update_processed_audio(text_file_dir, processed_audio_dir):
-    # Iterate through all the text files in the text_file_dir directory
-    for filename in os.listdir(text_file_dir):
-        if filename.endswith(".txt"):
-            text_file_path = os.path.join(text_file_dir, filename)
 
-            # Get the right path for saving the processed audio files
-            sub_dir_name = os.path.splitext(filename)[0]  # Removes the .txt extension
-            sub_processed_audio_dir_ = os.path.join(processed_audio_dir, sub_dir_name)
-            path_text_file_processed = os.path.join(sub_processed_audio_dir_, filename)
-
-            print(f"Processing {filename}")   
-
-            # Get the index of the lines already processed
-            with open(path_text_file_processed, "r") as processed_file:
-                random_lines_index = processed_file.readline()
-                # Convert the string to a list
-                random_lines_index = random_lines_index.strip()
-                random_lines_index = list(map(int, random_lines_index.strip('][').split(', ')))
-
-            # Process the audios of each line already processed
-            with open(text_file_path, "r") as text_file:
-                lines = text_file.readlines()
-                print(f"-Processed lines in {filename} : {random_lines_index} ")
-
-                # Process the audios of each line chosen at random
-                for i in random_lines_index:
-
-                    sub_processed_audio_dir = os.path.join(sub_processed_audio_dir_, f"{i}")
-
-                    # Get the audio files paths and the parameters of the line
-                    print(f"-- Line {i}:")
-                    line = lines[i].split()
-                    audio1_path, alpha, audio2_path, beta, SNR, duration = line
-                    alpha = float(alpha)
-                    beta = float(beta)
-                    duration = int(duration)
-                    
-                    # Create the paths for saving the processed audio files
-                    x1_path = os.path.join(sub_processed_audio_dir, f"{i}_x1.wav")
-                    x2_path = os.path.join(sub_processed_audio_dir, f"{i}_x2.wav")
-                    y_path = os.path.join(sub_processed_audio_dir, f"{i}_y.wav")
-                    x1_s_path = os.path.join(sub_processed_audio_dir, f"{i}_x1_s.wav")
-                    x2_s_path = os.path.join(sub_processed_audio_dir, f"{i}_x2_s.wav")
-                    x1_r_path = os.path.join(sub_processed_audio_dir, f"{i}_x1_r.wav")
-                    x2_r_path = os.path.join(sub_processed_audio_dir, f"{i}_x2_r.wav")
-
-                    # Calculate and save the mix audio signal and the original audio signals
-                    audio1, sr1 = torchaudio.load(audio1)
-                    audio2, sr2 = torchaudio.load(audio2)
-
-                    # Check if the sampling rates are 8000 Hz
-                    if sr1 != 8000:
-                        raise ValueError("Sampling rate r1 must be 8000 Hz")
-                    if sr2 != 8000:
-                        raise ValueError("Sampling rate r2 must be 8000 Hz")
-                    
-                    # Calculate the mix audio
-                    x1 = alpha * audio1[:, :duration]
-                    x2 = beta * audio2[:, :duration]
-                    y = x1 + x2
-
-                    torchaudio.save(x1_path, x1, 8000, format='wav')
-                    torchaudio.save(x2_path, x2, 8000, format='wav')
-                    torchaudio.save(y_path, y, 8000, format='wav')
-
-                    # Calculate and save the separated audios obtained after Sepformer
-                    x1_s, x2_s = audio_through_Sepformer(y_path)
-                    torchaudio.save(x1_s_path, x1_s, 8000, format='wav') 
-                    torchaudio.save(x2_s_path, x2_s, 8000, format='wav')
-            
-                    # Calculate and save the the separated audios obtained after Resepformer
-                    x1_r, x2_r = audio_through_Resepformer(y_path)
-                    torchaudio.save(x1_r_path, x1_r, 8000, format='wav')
-                    torchaudio.save(x2_r_path, x2_r, 8000, format='wav')
-                        
-                    # Calculate the SI_SDR for each audio
-                    print("Calculating the SI_SDR...")
-                    si_sdr = ScaleInvariantSignalDistortionRatio()
-
-                    # SISDR for audio without separation
-                    SI_SDR_x1 = si_sdr(y, x1)
-                    SI_SDR_x2 = si_sdr(y, x2)
-                    mean_SI_SDR_x = (SI_SDR_x1 + SI_SDR_x2) / 2
-                    print(f"SI_SDR For Audio Without Speech Separation: x1 = {SI_SDR_x1}, x2= {SI_SDR_x2}, mean = {mean_SI_SDR_x}") 
-
-                    # SISDR for audio through Sepformer
-                    SI_SDR_x1_s = si_sdr(x1_s, x1)
-                    SI_SDR_x2_s = si_sdr(x2_s, x2)
-                    mean_SI_SDR_x_s = (SI_SDR_x1_s + SI_SDR_x2_s) / 2
-                    print(f"SI_SDR For Audio Through Sepformer: x1 = {SI_SDR_x1_s}, x2= {SI_SDR_x2_s}, mean = {mean_SI_SDR_x_s}")   
-
-                    # SISDR for audio through Resepformer
-                    SI_SDR_x1_r = si_sdr(x1_r, x1)
-                    SI_SDR_x2_r = si_sdr(x2_r, x2)
-                    mean_SI_SDR_x_r = (SI_SDR_x1_r + SI_SDR_x2_r) / 2
-                    print(f"SI_SDR For Audio Through Resepformer: x1 = {SI_SDR_x1_r}, x2= {SI_SDR_x2_r}, mean = {mean_SI_SDR_x_r}")
-
-                    # Save the index of the processed line and the SI_SDR through Sepformer and Resepformer
-                    #with open(path_text_file_processed, "a") as processed_file:
-                    #    processed_file.write(f"{i} {audio1_path} {audio2_path} {SI_SDR_x1} {SI_SDR_x2} {mean_SI_SDR_x} {SI_SDR_x1_s} {SI_SDR_x2_s} {mean_SI_SDR_x_s} {SI_SDR_x1_r} {SI_SDR_x2_r} {mean_SI_SDR_x_r} \n")
-
-
-# %%
 base_dir = r"/idiap/temp/dkalaaji/Dana_Kalaaji"
 base_dir_PC = r"/idiap/temp/dkalaaji/Dana_Kalaaji/PC-GITA_per_task_16000Hz"
 text_file_dir = os.path.join(base_dir_PC, "text_files")
-print(text_file_dir)
 processed_audio_dir = os.path.join(base_dir_PC, "processed_audio")
-print(processed_audio_dir)
 
 # Test to see that code began
 joblib.dump({}, os.path.join(base_dir_PC, 'test_debut.pkl')) 
@@ -333,11 +228,5 @@ joblib.dump({}, os.path.join(base_dir_PC, 'test_debut.pkl'))
 lines_processed_per_file = 0  # If set to 0, process all the lines in the files
 processed_audio = process_x_audio_pair(base_dir, text_file_dir, processed_audio_dir, lines_processed_per_file)
 
-#update_processed_audio = update_processed_audio(text_file_dir, processed_audio_dir)
-
 # Test to see that code ended
 joblib.dump({}, os.path.join(base_dir_PC, 'test_fin.pkl')) 
-
-
-
-
