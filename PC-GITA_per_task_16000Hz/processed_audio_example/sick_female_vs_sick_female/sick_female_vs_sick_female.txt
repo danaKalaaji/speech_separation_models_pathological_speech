@@ -1,0 +1,4 @@
+[14093, 7297, 26162] 
+14093 PC-GITA_per_task_16000Hz/sentences/luisa/sinnormalizar/PD/AVPEPUDEA0035_luisa.wav PC-GITA_per_task_16000Hz/sentences/micasa/sinnormalizar/PD/AVPEPUDEA0009_micasa.wav 1.9242972135543823 17.601409912109375 -0.6404668688774109 
+7297 PC-GITA_per_task_16000Hz/sentences/loslibros/sinnormalizar/PD/AVPEPUDEA0014_loslibros.wav PC-GITA_per_task_16000Hz/sentences2/3_triste/non-normalized/pd/AVPEPUDEA0003_triste.wav 6.779330253601074 11.786113739013672 14.004302978515625 
+26162 PC-GITA_per_task_16000Hz/sentences/omar/sinnormalizar/PD/AVPEPUDEA0051_omar.wav PC-GITA_per_task_16000Hz/sentences/loslibros/sinnormalizar/PD/AVPEPUDEA0006_loslibros.wav 8.539459228515625 12.966910362243652 10.154304504394531 

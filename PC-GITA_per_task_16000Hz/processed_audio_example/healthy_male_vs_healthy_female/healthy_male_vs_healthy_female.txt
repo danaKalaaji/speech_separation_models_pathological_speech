@@ -1,0 +1,4 @@
+[53941, 7065, 24506] 
+53941 PC-GITA_per_task_16000Hz/sentences2/4_preocupado/non-normalized/hc/AVPEPUDEAC0042_preocupado.wav PC-GITA_per_task_16000Hz/sentences2/1_viste/non-normalized/hc/AVPEPUDEAC0023_viste.wav 2.346092462539673 9.238520622253418 8.426207542419434 
+7065 PC-GITA_per_task_16000Hz/sentences/loslibros/sinnormalizar/HC/AVPEPUDEAC0035_loslibros.wav PC-GITA_per_task_16000Hz/sentences/omar/sinnormalizar/HC/AVPEPUDEAC0020_omar.wav 1.8793226480484009 13.189230918884277 7.974834442138672 
+24506 PC-GITA_per_task_16000Hz/sentences/omar/sinnormalizar/HC/AVPEPUDEAC0033_omar.wav PC-GITA_per_task_16000Hz/sentences2/4_preocupado/non-normalized/hc/AVPEPUDEAC0011_preocupado.wav 5.401335716247559 11.215011596679688 12.69596004486084 

@@ -1,0 +1,4 @@
+[42981, 3202, 41279] 
+42981 PC-GITA_per_task_16000Hz/sentences2/2_juan/non-normalized/pd/AVPEPUDEA0057_juan.wav PC-GITA_per_task_16000Hz/sentences2/4_preocupado/non-normalized/pd/AVPEPUDEA0055_preocupado.wav 8.719066619873047 9.989590644836426 6.093289375305176 
+3202 PC-GITA_per_task_16000Hz/sentences/laura/sinnormalizar/PD/AVPEPUDEA0043_laura.wav PC-GITA_per_task_16000Hz/sentences2/3_triste/non-normalized/pd/AVPEPUDEA0030_triste.wav 5.408324241638184 18.885183334350586 0.8276985883712769 
+41279 PC-GITA_per_task_16000Hz/sentences2/2_juan/non-normalized/pd/AVPEPUDEA0041_juan.wav PC-GITA_per_task_16000Hz/sentences/laura/sinnormalizar/PD/AVPEPUDEA0058_laura.wav 5.6198225021362305 12.742223739624023 14.51042652130127 

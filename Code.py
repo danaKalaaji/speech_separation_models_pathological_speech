@@ -97,7 +97,7 @@ If lines_processed_per_file = 0, process all the lines in the text files
 def process_x_audio_pair(base_dir, text_file_dir, processed_audio_dir, lines_processed_per_file):
     # Iterate through all the text files in the text_file_dir directory
     for filename in os.listdir(text_file_dir):
-        if filename.endswith(".txt"):
+        if filename.endswith(".txt"):    # or if filename == "specific_file": 
             text_file_path = os.path.join(text_file_dir, filename)
 
             # Get the right path for saving the processed audio files
@@ -114,11 +114,11 @@ def process_x_audio_pair(base_dir, text_file_dir, processed_audio_dir, lines_pro
                 # If lines_processed_per_file = 0, process all the lines in the text files
                     if lines_processed_per_file == 0:
                         processed_lines_index = [i for i in range(len(lines))]
-                        #print(f"-Number of processed lines in {filename} : {len(processed_lines_index)} ")
+                        print(f"-Number of processed lines in {filename} : {len(processed_lines_index)} ")
                         processed_file.write(f"{len(processed_lines_index)} \n")
                     else:
                         processed_lines_index = generate_x_random_numbers(lines_processed_per_file, len(lines))
-                        #print(f"-Processed lines in {filename} : {processed_lines_index} ")
+                        print(f"-Processed lines in {filename} : {processed_lines_index} ")
                         processed_file.write(f"{processed_lines_index} \n")
   
                 # Process the audios of each line chosen at random
@@ -187,26 +187,24 @@ def process_x_audio_pair(base_dir, text_file_dir, processed_audio_dir, lines_pro
                         si_sdr = ScaleInvariantSignalDistortionRatio()
 
                         # SISDR for audio without separation
-                        SI_SDR_x1 = si_sdr(y, x1)
-                        SI_SDR_x2 = si_sdr(y, x2)
-                        mean_SI_SDR_x = (SI_SDR_x1 + SI_SDR_x2) / 2
-                        print(f"SI_SDR For Audio Without Speech Separation: x1 = {SI_SDR_x1}, x2= {SI_SDR_x2}, mean = {mean_SI_SDR_x}")  
+                        SI_SDR_y = si_sdr(y, x1)
+                        print(f"SI_SDR For Audio Without Speech Separation: {SI_SDR_y}")  
                         
                         # SISDR for audio through Sepformer
                         SI_SDR_x1_s = si_sdr(x1_s, x1)
-                        SI_SDR_x2_s = si_sdr(x2_s, x2)
-                        mean_SI_SDR_x_s = (SI_SDR_x1_s + SI_SDR_x2_s) / 2
-                        print(f"SI_SDR For Audio Through Sepformer: x1 = {SI_SDR_x1_s}, x2= {SI_SDR_x2_s}, mean = {mean_SI_SDR_x_s}")  
+                        SI_SDR_x2_s = si_sdr(x2_s, x1)
+                        SI_SDR_sep = max(SI_SDR_x1_s, SI_SDR_x2_s)
+                        print(f"SI_SDR For Audio Through Sepformer: {SI_SDR_sep} was {SI_SDR_x1_s} and {SI_SDR_x2_s}")  
                         
                         # SISDR for audio through Resepformer
                         SI_SDR_x1_r = si_sdr(x1_r, x1)
-                        SI_SDR_x2_r = si_sdr(x2_r, x2)
-                        mean_SI_SDR_x_r = (SI_SDR_x1_r + SI_SDR_x2_r) / 2
-                        print(f"SI_SDR For Audio Through Resepformer: x1 = {SI_SDR_x1_r}, x2= {SI_SDR_x2_r}, mean = {mean_SI_SDR_x_r}")
+                        SI_SDR_x2_r = si_sdr(x2_r, x1)
+                        SI_SDR_resep = max(SI_SDR_x1_r, SI_SDR_x2_r)
+                        print(f"SI_SDR For Audio Through Sepformer: {SI_SDR_resep} was {SI_SDR_x1_r} and {SI_SDR_x2_r}")  
 
                         # Save the index of the processed line and the SI_SDR through Sepformer and Resepformer
                         with open(path_text_file_processed, "a") as processed_file:
-                            processed_file.write(f"{i} {audio1_path_windows} {audio2_path_windows} {SI_SDR_x1} {SI_SDR_x2} {mean_SI_SDR_x} {SI_SDR_x1_s} {SI_SDR_x2_s} {mean_SI_SDR_x_s} {SI_SDR_x1_r} {SI_SDR_x2_r} {mean_SI_SDR_x_r} \n")
+                            processed_file.write(f"{i} {audio1_path_windows} {audio2_path_windows} {SI_SDR_y} {SI_SDR_sep} {SI_SDR_resep} \n")
                     
                     else:
                         # If the subdirectory already exists, the line has already been processed

@@ -1,0 +1,4 @@
+[53682, 56179, 32268] 
+53682 PC-GITA_per_task_16000Hz/sentences2/4_preocupado/non-normalized/hc/AVPEPUDEAC0018_preocupado.wav PC-GITA_per_task_16000Hz/sentences/rosita/sinnormalizar/PD/AVPEPUDEA0024_rosita.wav 6.302168846130371 17.80391502380371 17.141338348388672 
+56179 PC-GITA_per_task_16000Hz/sentences2/4_preocupado/non-normalized/hc/AVPEPUDEAC0057_preocupado.wav PC-GITA_per_task_16000Hz/sentences2/1_viste/non-normalized/pd/AVPEPUDEA0017_viste.wav 6.506412029266357 8.997112274169922 11.768742561340332 
+32268 PC-GITA_per_task_16000Hz/sentences/rosita/sinnormalizar/HC/AVPEPUDEAC0025_rosita.wav PC-GITA_per_task_16000Hz/sentences/micasa/sinnormalizar/PD/AVPEPUDEA0046_micasa.wav 4.167704105377197 11.834039688110352 12.598586082458496 
