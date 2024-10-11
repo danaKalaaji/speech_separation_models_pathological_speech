@@ -10,3 +10,4 @@ Relevant files:
 - Generate.txt.files.ipynb: The code for creating the directories and text files, downsampling the dataset, and updating the text files with random values of SNR for each audio combination and the corresponding values of alpha, beta and duration
 - Code.py : The code for processing the files and computing the performance
 - Analysis.ipynb : The code for analyzing the results
+- Idiap_Dana_Report.pdf: Project's report
