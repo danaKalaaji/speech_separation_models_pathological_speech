@@ -1,6 +1,21 @@
+
 # Evaluating Performance of Pathological Speech Detection 
 
 Our human auditory gives us the remarkable ability to navigate conversations even when in the middle of chaotic environments with other conversations and ambient noises around. However, translating this natural skill into the realm of computers presents a significant challenge known as the ”dinner party problem” within the speech processing field. While performant speech separation algorithm have been developed, they have been devised for neurotypical speakers, i.e., speakers without any speech impairments. However, this poses a problem as pathological conditions can disrupt the speech production mechanism, complicating the accurate processing by algorithm. This project aims to evaluate the performance of the state-of-the-art the speech separators models SepFormer and RE-SepFormer when handling such pathological signals in order to address these challenges.
+
+## Table of Contents
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Project Structure
+├── Code.py ├── Idiap_Dana_Report.pdf ├── PC-GITA_per_task_16000Hz │ ├── processed_audio │ ├── processed_audio_example │ └── text_files ├── README.md └── pytorch.yaml
+
+
+
 
 ### Relevant folders:
 - PC-GITA_per_task_16000Hz: folder containing
