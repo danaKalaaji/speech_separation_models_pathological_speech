@@ -7,7 +7,7 @@ Our human auditory gives us the remarkable ability to navigate conversations eve
 ```text
 PC-GITA_per_task_16000Hz/
 ├── text_files/                  # Per-scenario text files with audio combinations and metadata (alpha, beta, SNR, duration)
-├── processed_audio/             # Per-scenario files with SI-SDR before/after Sepformer and ReSepformer
+├── processed_audio/             # Per-scenario text files with SI-SDR before/after Sepformer and ReSepformer
 ├── processed_audio_example/     # Example data for 3 audio pairs per scenario with signals before/after separation
 ├── Generate.txt.files.ipynb     # Creates folders, downsamples data, assigns SNR, alpha, beta, duration
 ├── Code.py                      # Processes files and computes performance metrics
