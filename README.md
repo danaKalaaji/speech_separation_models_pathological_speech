@@ -12,18 +12,7 @@ Our human auditory gives us the remarkable ability to navigate conversations eve
 - [License](#license)
 
 ## Project Structure
-├── Code.py ├── Idiap_Dana_Report.pdf ├── PC-GITA_per_task_16000Hz │ ├── processed_audio │ ├── processed_audio_example │ └── text_files ├── README.md └── pytorch.yaml
-
-
-### Key Files and Directories
-PC-GITA_per_task_16000Hz/
-├── text_files/                  # Per-scenario text files with all audio combinations and corresponding alpha, beta, SNR, and duration values
-├── processed_audio/             # Per-scenario text files where each line corresponds to the two audio processed along with the SI-SDR of the the mix audio before and after going through Sepformer and through ReSepformer
-├── processed_audio_example/     # Example files for 3 audio pairs per scenario, with corresponding audio signals before/after separation
-├── Generate.txt.files.ipynb                # The code for creating the directories and text files, downsampling the dataset, and updating the text files with random values of SNR for each audio combination and the corresponding values of alpha, beta and duration
-├── Code.py # Code for processing the files and computing the performance
-├── Analysis.ipynb # Code for analyzing the results
-├── Idiap_Dana_Report.pdf # Project's report with details and results
+<pre> ## Project Structure ```text PC-GITA_per_task_16000Hz/ ├── text_files/ # Per-scenario text files with all audio combinations and corresponding alpha, beta, SNR, and duration values ├── processed_audio/ # Per-scenario text files where each line corresponds to the two audio processed along with the SI-SDR of the mix audio before and after going through Sepformer and through ReSepformer ├── processed_audio_example/ # Example files for 3 audio pairs per scenario, with corresponding audio signals before/after separation ├── Generate.txt.files.ipynb # Code for creating directories, downsampling, and assigning SNR, alpha, beta, and duration ├── Code.py # Code for processing files and computing performance ├── Analysis.ipynb # Code for analyzing results └── Idiap_Dana_Report.pdf # Project report with details and results ``` </pre>
 
 ## Installation
 
