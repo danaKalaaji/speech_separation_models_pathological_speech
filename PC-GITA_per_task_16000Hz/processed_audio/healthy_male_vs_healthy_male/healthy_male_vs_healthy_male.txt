@@ -1,4 +1,0 @@
-[18266, 45189, 27314] 
-18266 PC-GITA_per_task_16000Hz/sentences/micasa/sinnormalizar/HC/AVPEPUDEAC0034_micasa.wav PC-GITA_per_task_16000Hz/sentences2/1_viste/non-normalized/hc/AVPEPUDEAC0021_viste.wav 3.490413188934326 11.413793563842773 -0.3180375397205353 
-45189 PC-GITA_per_task_16000Hz/sentences2/3_triste/non-normalized/hc/AVPEPUDEAC0035_triste.wav PC-GITA_per_task_16000Hz/sentences/loslibros/sinnormalizar/HC/AVPEPUDEAC0050_loslibros.wav 0.7078615427017212 8.872903823852539 7.237495422363281 
-27314 PC-GITA_per_task_16000Hz/sentences/rosita/sinnormalizar/HC/AVPEPUDEAC0003_rosita.wav PC-GITA_per_task_16000Hz/sentences/omar/sinnormalizar/HC/AVPEPUDEAC0021_omar.wav 3.116180658340454 17.718748092651367 14.840354919433594 

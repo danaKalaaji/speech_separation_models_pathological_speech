@@ -70,11 +70,10 @@ Master-Semester-Project_Dana/
 ├── PC-GITA_per_task_16000Hz/
 │   ├── text_files/                  # Scenario metadata (combinations, SNR, duration)
 │   ├── processed_audio/             # SI-SDR results per scenario
-│   ├── processed_audio_example/     # Example separations (3 pairs per scenario)
-│   ├── Generate_txt_files.ipynb     # Data preprocessing and setup
-│   ├── Code.py                      # Main processing and metric computation
-│   ├── Analysis.ipynb               # Results analysis and visualization
-│   └── Idiap_Dana_Report.pdf        # Complete project report
+├── Generate_txt_files.ipynb     # Data preprocessing and setup
+├──Code.py                      # Main processing and metric computation
+├──Analysis.ipynb               # Results analysis and visualization
+├──Idiap_Dana_Report.pdf        # Complete project report
 └── README.md
 ```
 
